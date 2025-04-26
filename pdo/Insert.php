@@ -1,46 +1,43 @@
 <?php
-    // Vincular o arquivo da conexão
-    include('database.php');
+    //vincular o arquivo conexao
+include('database.php');
 
-    // Pegando os valores de GET
-    $nome = $_GET["nome"];
-    $email = $_GET["email"];
+    //GET
+// var_dump($_GET);
+$nome = $_GET["nome"];
+$email = $_GET["email"];
 
+    //variável que simula comando SQL
+// $sqlInsert = "INSERT INTO TB_USUARIO( NOME_US, EMAIL_US) 
+//                 VALUES(\"$nome\", '$email'); ";
 
-        // Preparando a consulta SQL para evitar injeção
-        $sqlinsert = "INSERT INTO TB_USUARIO (NOME, EMAIL_US) 
-        VALUES (\"$nome\", '$email'); ";
+// if ( $con->exec($sqlInsert)){
+//     echo "INSERIDO!!!";
+//     echo "<br>";
+//     echo "id" . $con->lastInsertId();
+// }else{
+//     echo "ESTUDAR MAIS!!!";
+// }
 
-    
-        // Executando a consulta
-        // if ($con->exec($sqlinsert)) {
-            // echo "Dados inseridos com sucesso!";
-            // echo "<br>";
-            // echo "id = " . $con->lastInsertId();
-        // } else {
-            // echo "Erro ao inserir os dados.";
-        // }
-        
-        
-        // if ($con->query($sqlinsert)) {
-            // echo "Dados inseridos com sucesso!";
-            // echo "<br>";
-            // echo "id = " . $con->lastInsertId();
-        // } else {
-            // echo "Erro ao inserir os dados.";
-        // }
+// if ( $con->query($sqlInsert)){
+//     echo "INSERIDO!!!";
+//     echo "<br>";
+//     echo "id" . $con->lastInsertId();
+// }else{
+//     echo "ESTUDAR MAIS!!!";
+// }
 
-        $sqlinsert = "INSERT INTO TB_USUARIO (NOME, EMAIL_US) 
-        VALUES (?,?); ";
+// -------------------------------
 
-        $stmt = $con->prepare($sqlinsert);
+$sqlInsert = "INSERT INTO TB_USUARIO( NOME_US, EMAIL_US) 
+        VALUES( ? , ? ); ";
+
+        $stmt = $con->prepare($sqlInsert);
         $bool = $stmt->execute([$nome, $email]);
-
         if($bool){
-            echo "Inserido";
+            echo "INSERIDO!!!";
+        }else{
+            echo "ESTUDAR MAIS!!!";
         }
-        else{
-            echo "Erro";
-        }
-        
+
 ?>
